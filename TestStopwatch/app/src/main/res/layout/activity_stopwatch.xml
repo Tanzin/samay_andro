@@ -18,17 +18,32 @@
         android:textStyle="bold"
         />
 
+
     <TextView
         android:id="@+id/timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvStopwatch"
-        android:layout_centerHorizontal="true"
+        android:layout_centerHorizontal="false"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="27dp"
         android:text="@string/start_time"
         android:textColor="#1c1c1c"
-        android:textSize="40sp" />
+        android:textSize="50sp" />
+
+    <TextView
+        android:id="@+id/milli"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvStopwatch"
+        android:layout_centerHorizontal="false"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="207dp"
+        android:layout_marginBottom="27dp"
+        android:text="@string/millisec"
+        android:textColor="#1c1c1c"
+        android:textSize="50sp" />
 
     <LinearLayout
         android:id="@+id/linlayButtons"
