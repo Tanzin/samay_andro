@@ -1,5 +1,6 @@
 package com.keepsearching.teststopwatch;
 
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -28,9 +29,10 @@ public class StopwatchActivity extends AppCompatActivity {
     int t = 1;
     int secs = 0;
     int mins = 0;
+    int hrs = 0;
     int milliseconds = 0;
     Handler handler = new Handler();
-
+    TextView mill;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,10 @@ public class StopwatchActivity extends AppCompatActivity {
         butnstart = (Button)findViewById(R.id.start);
         butnreset = (Button)findViewById(R.id.reset);
         time = (TextView) findViewById(R.id.timer);
+        mill = (TextView) findViewById(R.id.milli);
+        Typeface font = Typeface.createFromAsset(getAssets(),"digital-7.ttf");
+        time.setTypeface(font);
+        mill.setTypeface(font);
 
 
         butnstart.setOnClickListener(new OnClickListener() {
@@ -57,6 +63,7 @@ public class StopwatchActivity extends AppCompatActivity {
                 } else {
                     butnstart.setText("Start");
                     time.setTextColor(Color.BLUE);
+                    mill.setTextColor(Color.BLUE);
                     timeSwapBuff += timeInMilliseconds;
                     handler.removeCallbacks(updateTimer);
                     t = 1;
@@ -81,6 +88,7 @@ public class StopwatchActivity extends AppCompatActivity {
                 butnstart.setText("Start");
                 handler.removeCallbacks(updateTimer);
                 time.setText("00:00:00");
+                mill.setText(":00");
             }});
 
 
@@ -92,12 +100,17 @@ public class StopwatchActivity extends AppCompatActivity {
             timeInMilliseconds = SystemClock.uptimeMillis() - starttime;
             updatedtime = timeSwapBuff + timeInMilliseconds;
             secs = (int) (updatedtime / 1000);
+            hrs = mins/60;
+            mins = mins%60;
             mins = secs / 60;
             secs = secs % 60;
-            milliseconds = (int) (updatedtime % 1000);
-            time.setText("" + mins + ":" + String.format("%02d", secs) + ":"
-                    + String.format("%03d", milliseconds));
+            milliseconds = (int) (updatedtime % 1000 -1);
+            time.setText(String.format("%02d",hrs)+":" + String.format("%02d",mins) + ":" + String.format("%02d", secs));
+                    //+ ":"
+                    //+ String.format("%03d", milliseconds));
+            mill.setText(String.format(":"+"%03d",milliseconds));
             time.setTextColor(Color.RED);
+            mill.setTextColor(Color.RED);
             handler.postDelayed(this, 0);
         }};
 
