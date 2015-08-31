@@ -104,11 +104,11 @@ public class StopwatchActivity extends AppCompatActivity {
             mins = mins%60;
             mins = secs / 60;
             secs = secs % 60;
-            milliseconds = (int) (updatedtime % 1000 -1);
+            milliseconds = (int) (updatedtime % 1000);
             time.setText(String.format("%02d",hrs)+":" + String.format("%02d",mins) + ":" + String.format("%02d", secs));
                     //+ ":"
                     //+ String.format("%03d", milliseconds));
-            mill.setText(String.format(":"+"%03d",milliseconds));
+            mill.setText(String.format(":"+"%02d",milliseconds));
             time.setTextColor(Color.RED);
             mill.setTextColor(Color.RED);
             handler.postDelayed(this, 0);
